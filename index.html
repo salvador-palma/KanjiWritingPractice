@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WaniKani Random Vocab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="body" class="">
+
+    <main id="main" >
+        <div id="header">
+            <img src="./logo.png" alt="WaniKani Logo" id="logo">
+            <h1>RANDOM FETCHER</h1>
+        </div>
+        
+        <div id="Content">
+            
+            <label id="APIKeySection" class="inputs" >
+                API Key:
+                <input type="text" id="apiKey" placeholder="Enter your API key">
+                <button id="ApiBtn" style="width:106%">Submit</button>
+            </label>
+            
+            <div id="levelSection" class="inputs">
+                <label  class="inputs">
+                    Level (1–60):
+                    <div class="levelSelector">
+                        <input type="number" id="levelMin" min="1" max="60" placeholder="1"> To <input type="number" id="levelMax" min="1" max="60" placeholder="60">
+                    </div>
+                    
+                    <select name="practice" id="practice" class="inputs">
+                        <option value="writing">Writing Practice</option>
+                        <option value="reading">Reading Practice</option>
+                    </select>
+                </label>
+                
+                
+           
+        
+                <button id="fetchBtn" style="width:50%">Get Random Vocab</button>
+            </div>
+            
+    
+            <div id="output"></div>
+        </div>
+
+        
+    </main>
+    <aside class="vocab">
+        <span id="Level">Level 19</span>
+        <span id="Kanji">上級</span>
+        
+        <span id="Reading">じょうきゅう</span>
+        <span id="Meaning">Advanced</span>
+        <button id="Show">Show Solution</button>
+        
+    </aside>
+  
+
+  <script src="main.js"></script>
+</body>
+</html>
