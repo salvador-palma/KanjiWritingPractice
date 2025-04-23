@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showNextButton.parentNode.replaceChild(newButton, showNextButton); 
     showNextButton = newButton
     showNextButton.addEventListener('click', showSolution);
+    showNextButton.innerHTML = "Show Answer";
       
 
     async function showSolution(){
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       showNextButton.removeEventListener('click', showSolution);
       showNextButton.addEventListener('click', repeatSetting);
+      showNextButton.innerHTML = "Another one!";
     }
 
     async function repeatSetting(){
@@ -152,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const vocab = await getVocab(url);
         showItem(vocab, level, practiceType, levelMin, levelMax);
         showNextButton.removeEventListener('click', repeatSetting);
+        showNextButton.innerHTML = "Show Answer";
     }
 
     
