@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchBtn = document.getElementById('fetchBtn');
     const ApiBtn = document.getElementById('ApiBtn');
     const practiceTypeSelect = document.getElementById('practice');
-
+    const StrokeButton = document.getElementById('StrokeButton');
     
     
     // Load stored API key if available
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-
+    
     fetchBtn.addEventListener('click', async () => {
      
       const levelMin = parseInt(levelInputMin.value);
@@ -107,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showItem(vocab, level, practiceType, levelMin, levelMax) {
     const body = document.getElementById('body');
+    const strokeContainer = document.getElementById('StrokeOrder');
+    strokeContainer.innerHTML = ''; // Clear previous
     if(!body.classList.contains('answer-shown')){body.classList.add('answer-shown');}
     const characters = vocab.data.characters;
     const meanings = vocab.data.meanings
@@ -146,20 +148,58 @@ document.addEventListener('DOMContentLoaded', () => {
       showNextButton.removeEventListener('click', showSolution);
       showNextButton.addEventListener('click', repeatSetting);
       showNextButton.innerHTML = "Another one!";
+      
+      StrokeButton.classList.remove('hidden');
+      StrokeButton.removeEventListener('click', () => {
+        showStrokeOrder(characters);
+      });
+      StrokeButton.addEventListener('click', () => {
+        showStrokeOrder(characters);
+      });
+      
+      
+      
     }
 
     async function repeatSetting(){
+      const strokeContainer = document.getElementById('StrokeOrder');
+      strokeContainer.innerHTML = ''; // Clear previous
+
         const level = Math.floor(Math.random() * (levelMax - levelMin + 1)) + levelMin;
         let url = `https://api.wanikani.com/v2/subjects?types=vocabulary&levels=${level}`;
         const vocab = await getVocab(url);
         showItem(vocab, level, practiceType, levelMin, levelMax);
         showNextButton.removeEventListener('click', repeatSetting);
         showNextButton.innerHTML = "Show Answer";
+        StrokeButton.classList.add('hidden');
     }
 
     
     
     
     
+    
+  }
+
+  function showStrokeOrder(kanji) {
+    
+  
+    const strokeContainer = document.getElementById('StrokeOrder');
+    strokeContainer.innerHTML = ''; // Clear previous
+    document.getElementById('Kanji').innerText = "";
+    for (let i = 0; i < kanji.length; i++) {
+      const code = kanji[i].charCodeAt(0).toString(16).padStart(5, '0');
+      const svgPath = `kanji/${code}.svg`;
+      const objectEl = document.createElement('object');
+
+      objectEl.classList.add('strokeOrderSVG');
+      
+      objectEl.type = 'image/svg+xml';
+      objectEl.data = svgPath;
+      objectEl.width = 150;
+      objectEl.height = 150;
+    
+      strokeContainer.appendChild(objectEl);
+    }
     
   }

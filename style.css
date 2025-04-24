@@ -162,6 +162,9 @@ body{
         }
     }
 }
+.strokeOrderSVG{
+    filter: invert(1);
+}
 #output{
     color: red;
     text-align: center;
