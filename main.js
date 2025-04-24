@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showNextButton = newButton
     showNextButton.addEventListener('click', showSolution);
     showNextButton.innerHTML = "Show Answer";
-      
+    StrokeButton.classList.add('hidden'); 
 
     async function showSolution(){
       document.getElementById('Reading').innerText = reading;
